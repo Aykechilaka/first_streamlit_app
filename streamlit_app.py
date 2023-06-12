@@ -3,8 +3,10 @@ import streamlit
 
 streamlit.title('My Parents New Healthy Dinner')
 
-Omega 3 & Blueberry Oatmeal
+streamlit.subtitle('Breakfast Menu')
 
-Kale, Spinach & Rocket Smoothie
+ Omega_3 & Blueberry Oatmeal
+
+ Kale, Spinach & Rocket Smoothie
  
-Hard-Boiled Free-Range Egg
+ Hard-Boiled Free-Range Egg
