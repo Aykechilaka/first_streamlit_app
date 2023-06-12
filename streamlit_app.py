@@ -22,4 +22,4 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 
 selected_fruits = ['Avocado', 'Strawberries']
 fruit_indices = [my_fruit_list.index(fruit) for fruit in selected_fruits]
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), fruit_indices)
+streamlit.multiselect("Pick some fruits:", my_fruit_list, fruit_indices)
