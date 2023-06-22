@@ -72,25 +72,29 @@ streamlit.dataframe(fruits_to_show)
 
 
 
+###########################################################################
 
-streamlit.header('View Our Fruit List-Add Your Favorites')
+
+import streamlit
+import snowflake.connector
+
+streamlit.header('View Our Fruit List - Add Your Favorites')
+
 # Allow the end user to add a fruit to the list
 def insert_row_snowflake(new_fruit):
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("Insert into fruit_load_list values('"+ new_fruit +"')")
-    return "Thanks for adding" + new_fruit
-
-def get_fruit_load_list():
-  with my_cnx.cursor() as my_cur:
-    my_cur.execute("select * from fruit_load_list")
-    return my_cur.fetchall()
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("INSERT INTO fruit_load_list VALUES (?)", (new_fruit,))
+        my_cnx.commit()
+    my_cnx.close()
+    return "Thanks for adding " + new_fruit
 
 # Add a button to load the fruit
 if streamlit.button('Get Fruit List'):
-  my_cnx = snowflake.connector.connect(**streamlit.secrets[ "snowflake"])
-  my_data_rows = get_fruit_load_list()
-  my_cnx.close()
-  streamlit.dataframe(my_data_rows)
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    my_cnx.close()
+    streamlit.dataframe(my_data_rows)
 
 # Text input field for entering a new fruit
 new_fruit = streamlit.text_input("Enter a new fruit:")
@@ -103,6 +107,9 @@ if streamlit.button('Add Fruit') and new_fruit:
 predefined_fruits = ["jackfruit", "papaya", "guava", "kiwi"]
 for fruit in predefined_fruits:
     insert_row_snowflake(fruit)
+
+###########################################################################
+
 
 
 # import streamlit
