@@ -87,7 +87,9 @@ def insert_row_snowflake(new_fruit):
         my_cur.execute("INSERT INTO fruit_load_list VALUES('"+ new_fruit +"')")
         my_cnx.commit()
     return "Thanks for adding " + new_fruit
-    
+
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+
 def get_fruit_load_list(my_cnx):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("SELECT * FROM fruit_load_list")
