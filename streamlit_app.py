@@ -88,8 +88,6 @@ def insert_row_snowflake(new_fruit):
         my_cnx.commit()
     return "Thanks for adding " + new_fruit
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-
 def get_fruit_load_list(my_cnx):
     with my_cnx.cursor() as my_cur:
         my_cur.execute("SELECT * FROM fruit_load_list")
@@ -108,12 +106,12 @@ new_fruit = streamlit.text_input("Enter a new fruit:")
 
 # Button to insert a new fruit
 if streamlit.button('Add Fruit') and new_fruit:
-    insert_row_snowflake(new_fruit)
+    insert_row_snowflake(new_fruit, my_cxn)
 
 # Add predefined fruits to the list
 predefined_fruits = ["jackfruit", "papaya", "guava", "kiwi"]
 for fruit in predefined_fruits:
-    insert_row_snowflake(fruit)
+    insert_row_snowflake(fruit, my_cxn)
 
 ###########################################################################
 
