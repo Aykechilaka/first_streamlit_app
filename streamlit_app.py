@@ -88,6 +88,12 @@ def insert_row_snowflake(new_fruit):
         my_cnx.commit()
     my_cnx.close()
     return "Thanks for adding " + new_fruit
+    
+def get_fruit_load_list(my_cnx):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("SELECT * FROM fruit_load_list")
+        result = my_cur.fetchall()
+    return result
 
 # Add a button to load the fruit
 if streamlit.button('Get Fruit List'):
