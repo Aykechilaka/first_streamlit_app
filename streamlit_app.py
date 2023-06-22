@@ -106,12 +106,12 @@ new_fruit = streamlit.text_input("Enter a new fruit:")
 
 # Button to insert a new fruit
 if streamlit.button('Add Fruit') and new_fruit:
-    insert_row_snowflake(new_fruit, my_cxn)
+    insert_row_snowflake(new_fruit)
 
 # Add predefined fruits to the list
 predefined_fruits = ["jackfruit", "papaya", "guava", "kiwi"]
 for fruit in predefined_fruits:
-    insert_row_snowflake(fruit, my_cxn)
+    insert_row_snowflake(fruit)
 
 ###########################################################################
 
